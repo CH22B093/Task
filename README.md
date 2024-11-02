@@ -39,6 +39,6 @@ This project retrieves option chain data using yfinance and calculates margin re
 * Using yfinance simplified the data retrieval process compared to other APIs.
 
 ## AI Tools
-* I used Gemini Advanced to:
+* I used Gemini to:
     * Find alternative APIs for option chain data.
     * Understand the yfinance library and generate code for data retrieval and processing.
