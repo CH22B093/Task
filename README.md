@@ -8,6 +8,8 @@ This project retrieves option chain data using yfinance and calculates margin re
 
 ## Functions
 * **`get_option_chain_data(instrument, expiry_date)`:**  Retrieves option chain data for a given instrument using yfinance.
+  Returns the highest bid price for put options (PE) and the 
+  highest ask price for call options (CE) for each strike price.
 
   Args:
     instrument (str): Name of the instrument (e.g., 'NIFTY' or 'BANKNIFTY').
@@ -18,8 +20,7 @@ This project retrieves option chain data using yfinance and calculates margin re
       - strike: Strike price
       - expiryDate: Expiry date
       - side: Option type ('call' or 'put')
-      - bid: Bid price
-      - ask: Ask price
+      - bid/ask: Highest bid price for PE or highest ask price for CE
 
 * **`calculate_margin_and_premium(option_data)`:** Calculates margin requirement and premium earned for a given option chain DataFrame.
 
