@@ -7,21 +7,17 @@ This project retrieves option chain data using yfinance and calculates margin re
 2. Run the script: `python main.py`
 
 ## Functions
-* **`get_option_chain_data(instrument, expiry_date)`:**  Retrieves option chain data for a given instrument using yfinance.
-  Returns the highest bid price for put options (PE) and the 
-  highest ask price for call options (CE) for each strike price.
+* **`get_option_chain_data(instrument, expiry_date)`:** 
+    Retrieves option chain data for a given instrument and expiry date.
 
-  Args:
-    instrument (str): Name of the instrument (e.g., 'NIFTY' or 'BANKNIFTY').
-    expiry_date (str): Expiry date in 'YYYY-MM-DD' format.
+    Args:
+        instrument_name: Name of the instrument (e.g., NIFTY or BANKNIFTY).
+        expiry_date: The expiration date of the options, in YYYY-MM-DD format.
+        side: Type of option to retrieve. Use "PE" for Put and "CE" for Call.
 
-  Returns:
-    pd.DataFrame: Option chain data with columns:
-      - strike: Strike price
-      - expiryDate: Expiry date
-      - side: Option type ('call' or 'put')
-      - bid/ask: Highest bid price for PE or highest ask price for CE
-
+    Returns:
+        A Pandas DataFrame containing the option chain data.
+  
 * **`calculate_margin_and_premium(option_data)`:** Calculates margin requirement and premium earned for a given option chain DataFrame.
 
   Args:
