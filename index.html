@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gemini Chatbot</title>
+</head>
+<body>
+    <h1>Gemini Chatbot</h1>
+    <form method="POST">
+        <input type="text" name="user_input" placeholder="Enter your message">
+        <button type="submit">Send</button>
+    </form>
+    {% if user_input %}
+        <p>You: {{ user_input }}</p>
+        <p>Chatbot: {{ response }}</p>
+    {% endif %}
+</body>
+</html>
