@@ -4,70 +4,42 @@
     <title>Gemini Chatbot</title>
     <style>
         body {
-            font-family: sans-serif;
-            margin: 20px;
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center;   /* Center items horizontally */
+            height: 100vh;        /* Make the body fill the viewport height */
+            margin: 0;            /* Remove default body margins */
         }
-        h1 {
-            text-align: center;
-            color: #333; /* Dark gray */
+
+        .chat-message {
+            text-align: center; 
+            margin-bottom: 10px; 
         }
-        #chat-container {
-            border: 1px solid #ccc;
-            padding: 20px;
-            height: 300px;
-            overflow-y: scroll;
-            margin-top: 20px;
+
+        form {
+            display: flex;          /* Use flexbox for the form */
+            align-items: center;   /* Vertically align form elements */
+            width: 100%;           /* Make the form take full width */
+            margin-bottom: 20px;   /* Add space below the form */
         }
-        .message {
-            margin-bottom: 15px;
-        }
-        .user-message {
-            text-align: right;
-        }
-        .user-message .text {
-            background-color: #eee; /* Light gray */
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block; /* To prevent the background from stretching */
-        }
-        .bot-message {
-            text-align: left;
-        }
-        .bot-message .text {
-            background-color: #ccf; /* Light blue */
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-        }
+
         input[type="text"] {
-            width: 80%;
+            flex-grow: 1;           /* Allow the input to expand */
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
             margin-right: 10px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #4CAF50; /* Green */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Gemini Chatbot</h1>
-    <div id="chat-container">
-        {% for message in messages %}
-            <div class="message {{ 'user-message' if message['sender'] == 'user' else 'bot-message' }}">
-                <p class="text">{{ message['text'] }}</p>
-            </div>
-        {% endfor %}
-    </div>
     <form method="POST">
         <input type="text" name="user_input" placeholder="Enter your message">
         <button type="submit">Send</button>
     </form>
+    {% if user_input %}
+        <p class="chat-message">You: {{ user_input }}</p>
+        <p class="chat-message">Chatbot: {{ response }}</p>
+    {% endif %}
 </body>
 </html>
