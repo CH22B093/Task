@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chatbot</title>
+    <title>Gemini Chatbot</title>
     <style>
         body {
             font-family: sans-serif;
@@ -9,39 +9,65 @@
         }
         h1 {
             text-align: center;
+            color: #333; /* Dark gray */
         }
         #chat-container {
             border: 1px solid #ccc;
             padding: 20px;
             height: 300px;
             overflow-y: scroll;
+            margin-top: 20px;
         }
         .message {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .user-message {
             text-align: right;
         }
+        .user-message .text {
+            background-color: #eee; /* Light gray */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block; /* To prevent the background from stretching */
+        }
         .bot-message {
             text-align: left;
+        }
+        .bot-message .text {
+            background-color: #ccf; /* Light blue */
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Chatbot</h1>
+    <h1>Gemini Chatbot</h1>
+    <div id="chat-container">
+        {% for message in messages %}
+            <div class="message {{ 'user-message' if message['sender'] == 'user' else 'bot-message' }}">
+                <p class="text">{{ message['text'] }}</p>
+            </div>
+        {% endfor %}
+    </div>
     <form method="POST">
-        <input type="text" name="user_input" placeholder="Enter your message" style="width: 80%;">
+        <input type="text" name="user_input" placeholder="Enter your message">
         <button type="submit">Send</button>
     </form>
-    <div id="chat-container">
-        {% if user_input %}
-            <div class="message user-message">
-                <p>You: {{ user_input }}</p>
-            </div>
-            <div class="message bot-message">
-                <p>Chatbot: {{ response }}</p>
-            </div>
-        {% endif %}
-    </div>
 </body>
 </html>
