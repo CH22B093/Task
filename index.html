@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gemini Chatbot</title>
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+        }
+        .bot-message {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h1>Gemini Chatbot</h1>
+    <h1>Chatbot</h1>
     <form method="POST">
-        <input type="text" name="user_input" placeholder="Enter your message">
+        <input type="text" name="user_input" placeholder="Enter your message" style="width: 80%;">
         <button type="submit">Send</button>
     </form>
-    {% if user_input %}
-        <p>You: {{ user_input }}</p>
-        <p>Chatbot: {{ response }}</p>
-    {% endif %}
+    <div id="chat-container">
+        {% if user_input %}
+            <div class="message user-message">
+                <p>You: {{ user_input }}</p>
+            </div>
+            <div class="message bot-message">
+                <p>Chatbot: {{ response }}</p>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
