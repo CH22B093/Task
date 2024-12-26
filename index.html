@@ -6,7 +6,6 @@
 <body>
     <h1>Multi-modal Chatbot</h1>
     
-    <!-- Form to submit text and optionally an image -->
     <form method="POST" enctype="multipart/form-data">
         <p>
             <label for="user_input">Your prompt:</label><br>
@@ -19,27 +18,21 @@
         <button type="submit">Send</button>
     </form>
 
-    <!-- Display user’s prompt and the model’s response (both text and image) -->
     {% if user_input %}
-        <h2>Your prompt:</h2>
-        <p>{{ user_input }}</p>
+    <h2>Your prompt:</h2>
+    <p>{{ user_input }}</p>
     {% endif %}
 
     {% if response %}
-        <!-- If there's an error -->
         {% if response.error %}
             <p style="color: red;">{{ response.error }}</p>
         {% else %}
-            <!-- If there's text in the response -->
             {% if response.text %}
                 <h2>Text Response:</h2>
                 <p>{{ response.text }}</p>
             {% endif %}
-            
-            <!-- If there's an image in the response -->
             {% if response.image_url %}
                 <h2>Image Response:</h2>
-                <!-- If saved in a static path, you can adjust src accordingly -->
                 <img src="{{ response.image_url }}" alt="Generated Image" style="max-width: 300px;">
             {% endif %}
         {% endif %}
