@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gemini Chatbot</title>
+    <title>Chatbot</title>
     <style>
         body {
             display: flex;
@@ -29,17 +29,28 @@
             border: 1px solid #ccc;
             margin-right: 10px;
         }
+
+        .chat-message img {
+            max-width: 300px; 
+            height: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Gemini Chatbot</h1>
-    <form method="POST">
+    <h1>Chatbot</h1>
+    <form method="POST" enctype="multipart/form-data"> 
         <input type="text" name="user_input" placeholder="Enter your message">
+        <input type="file" name="image" accept="image/*"> 
         <button type="submit">Send</button>
     </form>
     {% if user_input %}
         <p class="chat-message">You: {{ user_input }}</p>
-        <p class="chat-message">Chatbot: {{ response }}</p>
+        {% if response.get('image_url') %}
+            <p class="chat-message">Chatbot: <img src="{{ response.image_url }}"></p> 
+        {% endif %}
+        {% if response.get('text') %}
+            <p class="chat-message">Chatbot: {{ response.text }}</p> 
+        {% endif %}
     {% endif %}
 </body>
 </html>
