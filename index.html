@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chatbot</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column; /* Align items vertically */
-            align-items: center;   /* Center items horizontally */
-            height: 100vh;        /* Make the body fill the viewport height */
-            margin: 0;            /* Remove default body margins */
-        }
-
-        .chat-message {
-            text-align: center; 
-            margin-bottom: 10px; 
-        }
-
-        form {
-            display: flex;          /* Use flexbox for the form */
-            align-items: center;   /* Vertically align form elements */
-            width: 100%;           /* Make the form take full width */
-            margin-bottom: 20px;   /* Add space below the form */
-        }
-
-        input[type="text"] {
-            flex-grow: 1;           /* Allow the input to expand */
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-        }
-
-        .chat-message img {
-            max-width: 300px; 
-            height: auto;
-        }
-    </style>
+    <title>Multi-modal Chatbot</title>
 </head>
 <body>
-    <h1>Chatbot</h1>
-    <form method="POST" enctype="multipart/form-data"> 
-        <input type="text" name="user_input" placeholder="Enter your message">
-        <input type="file" name="image" accept="image/*"> 
+    <h1>Multi-modal Chatbot</h1>
+    
+    <!-- Form to submit text and optionally an image -->
+    <form method="POST" enctype="multipart/form-data">
+        <p>
+            <label for="user_input">Your prompt:</label><br>
+            <textarea name="user_input" id="user_input" rows="4" cols="50"></textarea>
+        </p>
+        <p>
+            <label for="image">Upload an image (optional):</label><br>
+            <input type="file" name="image" id="image" accept="image/*">
+        </p>
         <button type="submit">Send</button>
     </form>
+
+    <!-- Display user’s prompt and the model’s response (both text and image) -->
     {% if user_input %}
-        <p class="chat-message">You: {{ user_input }}</p>
-        {% if response.get('image_url') %}
-            <p class="chat-message">Chatbot: <img src="{{ response.image_url }}"></p> 
-        {% endif %}
-        {% if response.get('text') %}
-            <p class="chat-message">Chatbot: {{ response.text }}</p> 
+        <h2>Your prompt:</h2>
+        <p>{{ user_input }}</p>
+    {% endif %}
+
+    {% if response %}
+        <!-- If there's an error -->
+        {% if response.error %}
+            <p style="color: red;">{{ response.error }}</p>
+        {% else %}
+            <!-- If there's text in the response -->
+            {% if response.text %}
+                <h2>Text Response:</h2>
+                <p>{{ response.text }}</p>
+            {% endif %}
+            
+            <!-- If there's an image in the response -->
+            {% if response.image_url %}
+                <h2>Image Response:</h2>
+                <!-- If saved in a static path, you can adjust src accordingly -->
+                <img src="{{ response.image_url }}" alt="Generated Image" style="max-width: 300px;">
+            {% endif %}
         {% endif %}
     {% endif %}
 </body>
