@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Multi-modal Chatbot</h1>
-    
+
     <form method="POST" enctype="multipart/form-data">
         <p>
             <label for="user_input">Your prompt:</label><br>
@@ -19,8 +19,8 @@
     </form>
 
     {% if user_input %}
-    <h2>Your prompt:</h2>
-    <p>{{ user_input }}</p>
+        <h2>Your prompt:</h2>
+        <p>{{ user_input }}</p>
     {% endif %}
 
     {% if response %}
@@ -31,11 +31,14 @@
                 <h2>Text Response:</h2>
                 <p>{{ response.text }}</p>
             {% endif %}
+
             {% if response.image_url %}
                 <h2>Image Response:</h2>
-                <img src="{{ response.image_url }}" alt="Generated Image" style="max-width: 300px;">
+                <img src="{{ url_for('serve_generated_image', filename=response.image_url.split('/')[-1]) }}" 
+                     alt="Generated Image" style="max-width: 300px;"> 
             {% endif %}
         {% endif %}
     {% endif %}
+
 </body>
 </html>
